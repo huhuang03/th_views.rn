@@ -30,7 +30,9 @@
 
  const App = () => {
   return(
-    ListLoadView()
+    <View>
+      <Text>This is an example</Text>
+    </View>
   )
  }
  export default App;
