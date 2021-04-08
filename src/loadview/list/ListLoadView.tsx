@@ -22,7 +22,7 @@ const defaultProps: Props<any> = {
     canLoadMore: true,
     canRefresh: true,
     autoRefresh: true,
-    dataLoader: () => null,
+    dataLoader: () => Promise.resolve([]),
     viewBuilder: () => (<View>Please use the viewBuilder</View>)
 }
 
@@ -36,13 +36,15 @@ function ListLoadView<T>(props: Props<T>): React.ReactElement<Props<T>> {
     var curPage = 0;
     var data: T[] = [];
 
+    const _fecthData = (page: number) => {
+        // ok, let do at here.
+    }
+
     const refresh = () => {
         if (isLoadingData) {
             return;
         }
-
         isLoadingData = true;
-
     }
 
     const loadMore = () => {
