@@ -1,10 +1,6 @@
 import React, {useState} from 'react'
 import { View } from 'react-native'
-import LoadErrorView from './LoadErrorView';
-import LoadLoadingView from './LoadLoadingView';
-import LoadNoDataView from './LoadNoDataView';
-
-// how to control outside??
+import LoadViewConfig from './LoadViewConfig';
 
 const _STATE_LOADING = 1;
 const _STATE_DATA = 2;
@@ -12,32 +8,7 @@ const _STATE_ERROR = 3;
 const _STATE_NO_DATA = 4;
 
 
-class LoadViewConfig {
-    static _default: LoadViewConfig = new LoadViewConfig();
-
-    static default() {
-        return LoadViewConfig._default;
-    }
-
-    static setDefault(config: LoadViewConfig) {
-        LoadViewConfig._default = config;
-    }
-
-    createNoDataView() {
-        return <LoadNoDataView></LoadNoDataView>
-    }
-
-    createErrorView() {
-        return <LoadErrorView></LoadErrorView>
-    }
-
-    createLoadingView() {
-        return <LoadLoadingView></LoadLoadingView>
-    }
-}
-
 export interface Props {
-    dataView: React.FC;
     config?: LoadViewConfig;
 }
 
@@ -74,7 +45,7 @@ const LoadView: React.FC<Props> = (props) => {
     }
 
     const _getDataView = () => {
-        return props.dataView;
+        return props.children
     }
 
     var Content;
