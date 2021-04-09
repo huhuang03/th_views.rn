@@ -19,6 +19,9 @@
    View,
  } from 'react-native';
 
+ // why you can't find.
+ import { ListDataView } from 'th_views.rn'
+
  import {
    Colors,
    DebugInstructions,
@@ -27,11 +30,19 @@
    ReloadInstructions,
  } from 'react-native/Libraries/NewAppScreen';
 
+ const dataFetch = (curPage: number) => {
+  const url = `https://api.stackexchange.com/2.2/users?page=${curPage}&order=desc&sort=reputation&site=stackoverflow`;
+  fetch(url).then(res => res.json())
+  .then(data => data.items)
+ }
 
  const App = () => {
   return(
     <View>
-      <Text>This is an example</Text>
+      <ListDataView>
+
+      </ListDataView>
+      {/* <Text>This is an example</Text> */}
     </View>
   )
  }

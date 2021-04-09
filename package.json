@@ -1,7 +1,7 @@
 {
   "name": "th_views.rn",
   "version": "0.0.1",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "license": "MIT",
   "scripts": {
     "build": "rollup -c"
