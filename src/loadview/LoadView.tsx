@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {ReactElement, ReactNode, useState} from 'react'
 import { View } from 'react-native'
 import LoadViewConfig from './LoadViewConfig';
 
@@ -7,12 +7,30 @@ const _STATE_DATA = 2;
 const _STATE_ERROR = 3;
 const _STATE_NO_DATA = 4;
 
+export enum State {
+    SPLASHING = 1,
+    LOADING = 2,
+    DATA = 3,
+    EMPTY = 4,
+}
 
 export interface Props {
-    config?: LoadViewConfig;
+    state: State;
+
+    /**
+     * First time loading view.
+     */
+    splashView?: ReactElement;
+
+    emptyView?: ReactElement;
+
+    errorView?: ReactElement;
 }
 
 
+/**
+ * How do you design a LoadView??
+ */
 const LoadView: React.FC<Props> = (props) => {
     const [state, setState] = useState(_STATE_LOADING)
 
@@ -32,23 +50,23 @@ const LoadView: React.FC<Props> = (props) => {
         setState(_STATE_DATA)
     }
 
-    const _getLoadingView = () => {
-        return props.config?.createLoadingView()?? LoadViewConfig.default().createLoadingView();
+    const _getLoadingView = (): ReactElement => {
+        // return props.config?.createLoadingView()?? LoadViewConfig.default().createLoadingView();
     }
 
-    const _getNoDataView = () => {
-        return props.config?.createNoDataView()?? LoadViewConfig.default().createNoDataView();
+    const _getNoDataView = (): ReactElement => {
+        // return props.config?.createNoDataView()?? LoadViewConfig.default().createNoDataView();
     }
 
-    const _getErrorView = () => {
-        return props.config?.createErrorView()?? LoadViewConfig.default().createErrorView();
+    const _getErrorView = (): ReactElement => {
+        // return props.config?.createErrorView()?? LoadViewConfig.default().createErrorView();
     }
 
-    const _getDataView = () => {
-        return props.children
+    const _getDataView = (): ReactNode => {
+        return props.children?? <View/>;
     }
 
-    var Content;
+    let Content: ReactNode;
     if (state == _STATE_LOADING) {
         Content = _getLoadingView();
     } else if (state == _STATE_DATA) {
