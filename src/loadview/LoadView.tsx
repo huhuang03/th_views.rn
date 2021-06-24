@@ -1,87 +1,46 @@
 import React, {ReactElement, ReactNode, useState} from 'react'
-import { View } from 'react-native'
-import LoadViewConfig from './LoadViewConfig';
-
-const _STATE_LOADING = 1;
-const _STATE_DATA = 2;
-const _STATE_ERROR = 3;
-const _STATE_NO_DATA = 4;
 
 export enum State {
     SPLASHING = 1,
-    LOADING = 2,
-    DATA = 3,
-    EMPTY = 4,
+    DATA = 2,
+    ERROR = 3,
 }
+
 
 export interface Props {
     state: State;
-
     /**
      * First time loading view.
      */
     splashView?: ReactElement;
 
-    emptyView?: ReactElement;
+    dataView?: ReactElement;
 
     errorView?: ReactElement;
 }
 
-
 /**
- * How do you design a LoadView??
+ * If you don't have an loading? how can you have a splash.
  */
 const LoadView: React.FC<Props> = (props) => {
-    const [state, setState] = useState(_STATE_LOADING)
+    const [state, setState] = useState(props.state)
 
-    const showLoading = () => {
-        setState(_STATE_LOADING)
-    }
-
-    const showNoData = () => {
-        setState(_STATE_NO_DATA)
-    }
-
-    const showError = () => {
-        setState(_STATE_ERROR)
-    }
-
-    const showData = () => {
-        setState(_STATE_DATA)
-    }
-
-    const _getLoadingView = (): ReactElement => {
-        // return props.config?.createLoadingView()?? LoadViewConfig.default().createLoadingView();
-    }
-
-    const _getNoDataView = (): ReactElement => {
-        // return props.config?.createNoDataView()?? LoadViewConfig.default().createNoDataView();
-    }
-
-    const _getErrorView = (): ReactElement => {
-        // return props.config?.createErrorView()?? LoadViewConfig.default().createErrorView();
-    }
-
-    const _getDataView = (): ReactNode => {
-        return props.children?? <View/>;
-    }
-
-    let Content: ReactNode;
-    if (state == _STATE_LOADING) {
-        Content = _getLoadingView();
-    } else if (state == _STATE_DATA) {
-        Content = _getDataView();
-    } else if (state == _STATE_ERROR) {
-        Content = _getErrorView();
-    } else if (state == _STATE_NO_DATA) {
-        Content = _getNoDataView();
+    const getViewByState = () => {
+        if (state == State.SPLASHING) {
+            return props.splashView
+        } else if (state == State.DATA) {
+            return props.dataView
+        } else {
+            return props.errorView
+        }
     }
 
     return (
-        <View>
-            {Content}
-        </View>
+        <view>
+            getViewByState()
+        </view>
     )
 }
+
 
 export default LoadView

@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import { FlatList, RefreshControlBase, View } from 'react-native'
-import LoadView from '../LoadView';
+import LoadView2 from '../LoadView2';
 
 /**
  * How to set the default value?
@@ -53,12 +53,12 @@ function ListLoadView<T>(props: Props<T>): React.ReactElement<Props<T>> {
             curPage += 1
         })
     }
-    const Rst = (<LoadView>
+    const Rst = (<LoadView2>
         <FlatList
         renderItem={({item}) => props.viewBuilder(item)}
         data={data}
         ></FlatList>
-    </LoadView>)
+    </LoadView2>)
 
     return (
         Rst
