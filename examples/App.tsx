@@ -1,49 +1,21 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
+import * as React from 'react';
+import {View, Pressable, Text} from 'react-native';
 
- import React from 'react';
- import {
-   SafeAreaView,
-   ScrollView,
-   StatusBar,
-   StyleSheet,
-   Text,
-   useColorScheme,
-   View,
- } from 'react-native';
+type Props = {};
 
- // why you can't find.
- import { ListDataView } from 'th_views.rn'
+export const App = () => {
+  const Item = ({text, onClick}: {text: string; onClick: () => void}) => {
+    return (
+      <Pressable onPress={onClick}>
+        <Text>{text}</Text>
+      </Pressable>
+    );
+  };
 
- import {
-   Colors,
-   DebugInstructions,
-   Header,
-   LearnMoreLinks,
-   ReloadInstructions,
- } from 'react-native/Libraries/NewAppScreen';
-
- const dataFetch = (curPage: number) => {
-  const url = `https://api.stackexchange.com/2.2/users?page=${curPage}&order=desc&sort=reputation&site=stackoverflow`;
-  fetch(url).then(res => res.json())
-  .then(data => data.items)
- }
-
- const App = () => {
-  return(
+  return (
     <View>
-      <ListDataView>
-
-      </ListDataView>
-      {/* <Text>This is an example</Text> */}
+      <Item text={'加载成功'} onClick={() => {}} />
+      <Item text={'加载失败'} onClick={() => {}} />
     </View>
-  )
- }
- export default App;
+  );
+};
