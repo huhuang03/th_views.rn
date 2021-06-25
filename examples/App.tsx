@@ -1,5 +1,7 @@
 import * as React from 'react';
 import {View, Pressable, Text} from 'react-native';
+// Haha, compiler can recognize this, but not the webstorm
+import {LoadView} from 'th_views.rn';
 
 type Props = {};
 
@@ -19,3 +21,5 @@ export const App = () => {
     </View>
   );
 };
+
+export default App;

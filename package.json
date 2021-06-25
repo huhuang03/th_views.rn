@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "main": "lib/index.js",
   "license": "MIT",
+  "source": "src/index.ts",
   "scripts": {
     "build": "rollup -c"
   },
@@ -13,6 +14,7 @@
   },
   "devDependencies": {
     "@types/react-native": "^0.64.2",
+    "babel-plugin-module-resolver": "^4.1.0",
     "rollup": "^2.44.0",
     "rollup-plugin-typescript2": "^0.30.0",
     "typescript": "^4.2.3"

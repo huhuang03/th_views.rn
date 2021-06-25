@@ -1,4 +1,4 @@
-import LoadErrorView from './LoadErrorView';
+import DefaultErrorView from './defaults/DefaultErrorView';
 import LoadLoadingView from './LoadLoadingView';
 import LoadNoDataView from './LoadNoDataView';
 
@@ -18,7 +18,7 @@ export default class LoadViewConfig {
     }
 
     createErrorView() {
-        return <LoadErrorView></LoadErrorView>
+        return <DefaultErrorView></DefaultErrorView>
     }
 
     createLoadingView() {

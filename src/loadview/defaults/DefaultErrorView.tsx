@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-const LoadErrorView = () => {
+const DefaultErrorView = () => {
     return (
         <View
             style={{
@@ -15,4 +15,4 @@ const LoadErrorView = () => {
 }
 
 
-export default LoadErrorView
+export default DefaultErrorView

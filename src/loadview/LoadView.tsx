@@ -1,4 +1,6 @@
 import React, {ReactElement, ReactNode, useState} from 'react'
+import DefaultSplashView from "./defaults/DefaultSplashView";
+import DefaultErrorView from "./defaults/DefaultErrorView";
 
 export enum State {
     SPLASHING = 1,
@@ -8,13 +10,12 @@ export enum State {
 
 
 export interface Props {
-    state: State;
     /**
      * First time loading view.
      */
     splashView?: ReactElement;
 
-    dataView?: ReactElement;
+    dataView: ReactElement;
 
     errorView?: ReactElement;
 }
@@ -23,21 +24,21 @@ export interface Props {
  * If you don't have an loading? how can you have a splash.
  */
 const LoadView: React.FC<Props> = (props) => {
-    const [state, setState] = useState(props.state)
+    const [state, setState] = useState(State.SPLASHING)
 
     const getViewByState = () => {
         if (state == State.SPLASHING) {
-            return props.splashView
+            return props.splashView && <DefaultSplashView/>
         } else if (state == State.DATA) {
             return props.dataView
         } else {
-            return props.errorView
+            return props.errorView && <DefaultErrorView/>
         }
     }
 
     return (
         <view>
-            getViewByState()
+            {getViewByState()}
         </view>
     )
 }
