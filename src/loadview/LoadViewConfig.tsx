@@ -1,5 +1,4 @@
 import DefaultErrorView from './defaults/DefaultErrorView';
-import LoadLoadingView from './LoadLoadingView';
 import LoadNoDataView from './LoadNoDataView';
 
 export default class LoadViewConfig {
@@ -22,6 +21,6 @@ export default class LoadViewConfig {
     }
 
     createLoadingView() {
-        return <LoadLoadingView></LoadLoadingView>
+        // return <LoadLoadingView></LoadLoadingView>
     }
 }

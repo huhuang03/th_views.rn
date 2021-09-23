@@ -1,5 +1,5 @@
-import React, {useState} from 'react'
-import { FlatList, RefreshControlBase, View } from 'react-native'
+import React from 'react'
+import { FlatList, View } from 'react-native'
 import LoadView2 from '../LoadView2';
 
 /**

@@ -5,8 +5,11 @@
   "license": "MIT",
   "source": "src/index.ts",
   "scripts": {
-    "build": "rollup -c"
+    "build": "yarn run tsc"
   },
+  "files": [
+    "lib"
+  ],
   "dependencies": {},
   "peerDependencies": {
     "react": "^17.0.2",

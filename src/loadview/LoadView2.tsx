@@ -15,7 +15,7 @@ export enum State {
 }
 
 export interface Props {
-    state: State;
+    state?: State;
 
     /**
      * First time loading view.
