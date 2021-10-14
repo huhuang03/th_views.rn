@@ -7,10 +7,10 @@ import React, {
 } from 'react';
 
 import {
-    ActivityIndicator,
+    ActivityIndicator, Dimensions,
     FlatList,
     FlatListProps,
-    RefreshControl,
+    RefreshControl, Text,
     View,
     ViewStyle,
 } from 'react-native';
@@ -25,6 +25,7 @@ export enum ErrorType {
 export interface ListDataHandler<L, D> {
     hasMore: (l: L) => boolean;
     getData: (l: L) => D[];
+    isOk: (l: L) => boolean;
 }
 
 /**
@@ -56,7 +57,7 @@ export interface AppLoadListProps<L, D> {
      */
     showInitLoading?: boolean;
 
-    flatListProps?: Partial<FlatListProps<T>>;
+    flatListProps?: Partial<FlatListProps<D>>;
 
     // versionNum暂时用来控制刷新。
     versionNum?: number;
@@ -79,12 +80,16 @@ function LoadList<L, D>(
   props: AppLoadListProps<L, D>,
   ref: ForwardedRef<GJListViewRef<D>>,
 ): React.ReactElement<D> {
+    const {width: windowWidth} = Dimensions.get('window'); // 屏幕宽高
+
     const {showInitLoading = true, canRefresh = false} = props;
     const {
+        listDataHandler,
         size = 10,
         emptyConfig = {hint: '数据为空'},
         dividerHeight = 0,
     } = props;
+
     const [data, setData] = useState<D[] | undefined>(undefined);
     // how many page that got.
     const [page, setPage] = useState(0);
@@ -104,7 +109,7 @@ function LoadList<L, D>(
         if (emptyConfig.builder) {
             return <emptyConfig.builder />;
         } else {
-            return <AppEmptyView desc={emptyConfig?.hint ?? ''} />;
+            return <Text>数据为空</Text>
         }
     };
 
@@ -122,20 +127,20 @@ function LoadList<L, D>(
 
         props
           .dataLoader({index, size})
-          .then(gjList => {
-              if (!GJBaseMethod.isOk(gjList)) {
+          .then(listData => {
+              if (!listDataHandler.isOk(listData)) {
                   setShowError(true);
                   setErrorType(ErrorType.SERVER);
               } else {
                   setShowError(false);
                   setIsFirstTimeLoadData(false);
 
-                  setNoMoreData(!GJListMethod.hasMore(gjList));
-                  let newList: T[] = [];
+                  setNoMoreData(!listDataHandler.hasMore(listData));
+                  let newList: D[] = [];
                   if (index !== 1) {
                       newList.push(...(data ?? []));
                   }
-                  newList.push(...(gjList.data ?? []));
+                  newList.push(...(listDataHandler.getData(listData) ?? []));
                   setData(newList);
                   setPage(index);
               }
@@ -170,7 +175,7 @@ function LoadList<L, D>(
     }, [props.versionNum]);
 
     if (showError) {
-        return <AppErrorView errorType={errorType} onRefresh={refresh} />;
+        return <Text>出错了。请稍后刷新重试</Text>
     }
 
     if (dataIsEmpty) {
