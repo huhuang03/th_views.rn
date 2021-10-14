@@ -1,6 +1,6 @@
 import React, {
     ForwardedRef,
-    forwardRef,
+    forwardRef, ReactElement,
     useEffect,
     useImperativeHandle,
     useState,
@@ -17,11 +17,6 @@ import {
 import PageVo from './model/PageVo';
 import {gDp} from 'th_comm.rn';
 
-export enum ErrorType {
-    SERVER,
-    NET,
-}
-
 export interface ListDataHandler<L, D> {
     hasMore: (l: L) => boolean;
     getData: (l: L) => D[];
@@ -30,16 +25,14 @@ export interface ListDataHandler<L, D> {
 
 /**
  * 怎么处理分页参数？？
- *
- * 参数可能会很多。不要惊讶
  */
-export interface AppLoadListProps<L, D> {
+export interface LoadListProps<L, D> {
     listDataHandler: ListDataHandler<L, D>;
 
     style?: ViewStyle;
-    dataLoader: (page: PageVo) => Promise<L>;
-    viewBuilder: (item: D, index: number) => React.ReactElement;
     outStyle?: ViewStyle;
+    dataLoader: (page: PageVo) => Promise<L>;
+    renderItem: ({item, index}: {item: D, index: number}) => ReactElement;
 
     // ItemView间隔大小
     dividerHeight?: number;
@@ -59,9 +52,6 @@ export interface AppLoadListProps<L, D> {
 
     flatListProps?: Partial<FlatListProps<D>>;
 
-    // versionNum暂时用来控制刷新。
-    versionNum?: number;
-
     canRefresh?: boolean;
 }
 
@@ -77,7 +67,7 @@ export interface GJListViewRef<D> {
  * D: is the data type.
  */
 function LoadList<L, D>(
-  props: AppLoadListProps<L, D>,
+  props: LoadListProps<L, D>,
   ref: ForwardedRef<GJListViewRef<D>>,
 ): React.ReactElement<D> {
     const {width: windowWidth} = Dimensions.get('window'); // 屏幕宽高
@@ -98,7 +88,6 @@ function LoadList<L, D>(
     const [isLoadingData, setIsLoadingData] = useState(false);
 
     const [showError, setShowError] = useState(false);
-    const [errorType, setErrorType] = useState(ErrorType.SERVER);
 
     const [showLoading, setShowLoading] = useState(false);
     const [isFirstTimeLoadData, setIsFirstTimeLoadData] = useState(true);
@@ -130,7 +119,6 @@ function LoadList<L, D>(
           .then(listData => {
               if (!listDataHandler.isOk(listData)) {
                   setShowError(true);
-                  setErrorType(ErrorType.SERVER);
               } else {
                   setShowError(false);
                   setIsFirstTimeLoadData(false);
@@ -152,7 +140,6 @@ function LoadList<L, D>(
               console.error(err);
               setShowLoading(false);
               setShowError(true);
-              setErrorType(ErrorType.NET);
               setIsLoadingData(false);
           });
     };
@@ -172,7 +159,7 @@ function LoadList<L, D>(
     // 调用两次，说明控件被回收，又被创建了。
     useEffect(() => {
         refresh();
-    }, [props.versionNum]);
+    }, []);
 
     if (showError) {
         return <Text>出错了。请稍后刷新重试</Text>
@@ -228,7 +215,7 @@ function LoadList<L, D>(
         {...props.flatListProps}
         contentContainerStyle={props.style}
         data={data ?? []}
-        renderItem={item => props.viewBuilder(item.item, item.index)}
+        renderItem={props.renderItem}
         refreshControl={
             (canRefresh && (
               <RefreshControl onRefresh={refresh} refreshing={false} />
