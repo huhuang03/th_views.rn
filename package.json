@@ -1,6 +1,6 @@
 {
   "name": "th_views.rn",
-  "version": "0.0.1",
+  "version": "0.0.1-rc.1",
   "main": "lib/index.js",
   "license": "MIT",
   "source": "src/index.ts",
@@ -11,7 +11,9 @@
   "files": [
     "lib"
   ],
-  "dependencies": {},
+  "dependencies": {
+    "th_comm.rn": "^0.0.4-alpha.9"
+  },
   "peerDependencies": {
     "react": "^17.0.2",
     "react-native": "^0.64.0"
