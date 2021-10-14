@@ -12,7 +12,6 @@ import {
     FlatListProps,
     RefreshControl, Text,
     View,
-    ViewStyle,
 } from 'react-native';
 import PageVo from './model/PageVo';
 import {gDp} from 'th_comm.rn';
@@ -28,14 +27,12 @@ export interface ListDataHandler<L, D> {
  */
 export interface LoadListProps<L, D> {
     listDataHandler: ListDataHandler<L, D>;
-
-    style?: ViewStyle;
-    outStyle?: ViewStyle;
     dataLoader: (page: PageVo) => Promise<L>;
     renderItem: ({item, index}: {item: D, index: number}) => ReactElement;
 
     // ItemView间隔大小
     dividerHeight?: number;
+
     // 每页数据大小
     size?: number;
 
@@ -45,8 +42,9 @@ export interface LoadListProps<L, D> {
     };
 
     /**
+     * 是否在首次加载的时候显示loading
      * 一般情况下，加载第一页需要显示Loading。
-     * 但是有些特殊情况，可能不想要这个loading（其它地方已经显示loading了）
+     * 但是有些特殊情况，可能不想要这个loading（比如其它地方已经显示loading了）
      */
     showInitLoading?: boolean;
 
@@ -209,11 +207,9 @@ function LoadList<L, D>(
 
     return (
       <FlatList
-        style={props.outStyle}
         showsVerticalScrollIndicator={false}
         showsHorizontalScrollIndicator={false}
         {...props.flatListProps}
-        contentContainerStyle={props.style}
         data={data ?? []}
         renderItem={props.renderItem}
         refreshControl={
