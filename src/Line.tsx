@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, ViewStyle} from 'react-native';
+import {View, ViewStyle} from 'react-native';
 
 export interface LineProps {
   height: number;
