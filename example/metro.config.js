@@ -5,7 +5,12 @@
  * @format
  */
 
+const path = require('path')
+
+const libRoot = path.resolve(__dirname, '..');
+
 module.exports = {
+  watchFolders: [libRoot],
   transformer: {
     getTransformOptions: async () => ({
       transform: {
