@@ -20,6 +20,7 @@ module.exports = {
     }),
   },
   resolver: {
-    providesModuleNodeModules: ['react-native', 'react'],
+    nodeModulesPaths: [path.join(__dirname, 'node_modules')],
+    // extraNodeModules: ['react-native', 'react'],
   },
 };
