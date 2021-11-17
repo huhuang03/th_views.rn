@@ -1,12 +1,13 @@
 {
   "name": "th_views.rn",
-  "version": "0.0.1-rc.1",
+  "version": "0.0.2-rc.1",
   "main": "lib/index.js",
   "license": "MIT",
   "source": "src/index.ts",
   "types": "lib/index.d.ts",
   "scripts": {
-    "build": "yarn run tsc"
+    "build": "yarn run tsc",
+    "prepublish": "yarn run build"
   },
   "files": [
     "lib"
