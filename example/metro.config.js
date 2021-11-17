@@ -5,7 +5,7 @@
  * @format
  */
 
-const path = require('path')
+const path = require('path');
 
 const libRoot = path.resolve(__dirname, '..');
 
@@ -18,5 +18,8 @@ module.exports = {
         inlineRequires: true,
       },
     }),
+  },
+  resolver: {
+    providesModuleNodeModules: ['react-native', 'react'],
   },
 };
