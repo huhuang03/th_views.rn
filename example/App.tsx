@@ -16,6 +16,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+// so you can't parse babel.config.js?
 import {Line} from 'th_views.rn';
 
 const Section: React.FC<{
