@@ -3,7 +3,7 @@ import {View, ViewStyle} from 'react-native';
 
 export interface LineProps {
   height: number;
-  paddingHorizontal: number;
+  paddingHorizontal?: number;
 
   style?: ViewStyle;
 }
@@ -12,11 +12,13 @@ export interface LineProps {
  * A horizontal line
  */
 const Line: React.FC<LineProps> = props => {
+  const {paddingHorizontal = 0} = props;
+
   return (
     <View
       style={{
         height: props.height,
-        paddingHorizontal: props.paddingHorizontal,
+        paddingHorizontal: paddingHorizontal,
         ...props.style,
       }}>
     </View>

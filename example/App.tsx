@@ -42,7 +42,6 @@ const Section: React.FC<{
         ]}>
         {children}
       </Text>
-      <Line />
     </View>
   );
 };
@@ -61,6 +60,12 @@ const App = () => {
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
         <Header />
+        <Line
+          style={{
+            backgroundColor: 'red',
+          }}
+          height={100}
+        />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
