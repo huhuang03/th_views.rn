@@ -1,8 +1,6 @@
 import * as React from 'react';
 import {View, Pressable, Text} from 'react-native';
-// Haha, compiler can recognize this, but not the webstorm
-import {LoadView} from 'th_views.rn';
-
+import DemoImageWithLoadingAndCache from "./src/demo-image/DemoImageWithLoadingAndCache";
 type Props = {};
 
 export const App = () => {
@@ -16,6 +14,7 @@ export const App = () => {
 
   return (
     <View>
+      <DemoImageWithLoadingAndCache />
       <Item text={'加载成功'} onClick={() => {}} />
       <Item text={'加载失败'} onClick={() => {}} />
     </View>
