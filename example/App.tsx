@@ -1,13 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * Generated with the TypeScript template
- * https://github.com/react-native-community/react-native-template-typescript
- *
- * @format
- */
-
 import React from 'react';
 import {
   SafeAreaView,
@@ -26,6 +16,7 @@ import {
   LearnMoreLinks,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
+import {Line} from 'th_views.rn';
 
 const Section: React.FC<{
   title: string;
@@ -51,6 +42,7 @@ const Section: React.FC<{
         ]}>
         {children}
       </Text>
+      <Line />
     </View>
   );
 };
