@@ -18,6 +18,7 @@ import {
 } from 'react-native/Libraries/NewAppScreen';
 // so you can't parse babel.config.js?
 import {Line} from 'th_views.rn';
+import ExampleImage from "./src/ExampleImage";
 
 const Section: React.FC<{
   title: string;
@@ -71,20 +72,7 @@ const App = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.tsx</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
+          <ExampleImage />
         </View>
       </ScrollView>
     </SafeAreaView>

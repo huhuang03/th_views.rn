@@ -12,6 +12,7 @@
     "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
   },
   "dependencies": {
+    "@zfkcyjy/react-native-fast-image": "^8.5.11-rc.1",
     "react": "17.0.2",
     "react-native": "0.66.3"
   },

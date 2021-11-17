@@ -21,6 +21,5 @@ module.exports = {
   },
   resolver: {
     nodeModulesPaths: [path.join(__dirname, 'node_modules')],
-    // extraNodeModules: ['react-native', 'react'],
   },
 };

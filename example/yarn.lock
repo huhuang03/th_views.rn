@@ -1420,6 +1420,11 @@
   dependencies:
     eslint-visitor-keys "^1.1.0"
 
+"@zfkcyjy/react-native-fast-image@^8.5.11-rc.1":
+  version "8.5.11-rc.1"
+  resolved "https://registry.npmjs.org/@zfkcyjy/react-native-fast-image/-/react-native-fast-image-8.5.11-rc.1.tgz#8c2ad8ca4ffe3d8a6eb9a03eccc36477dafdb6c1"
+  integrity sha512-sSfoggcBeTmetKepjmlixpl1pth+5JI9RAO2kUwm23gKBHbRffkg9bYFaEU0GxXRDjLxZLG+5SL890Perhs2NQ==
+
 abab@^2.0.3, abab@^2.0.5:
   version "2.0.5"
   resolved "https://registry.npmjs.org/abab/-/abab-2.0.5.tgz#c0b678fb32d60fc1219c784d6a826fe385aeb79a"

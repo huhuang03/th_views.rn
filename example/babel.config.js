@@ -8,6 +8,7 @@ module.exports = {
       {
         alias: {
           'th_views.rn': path.join(__dirname, '..', 'src', 'index.ts'),
+          '@imgs': './src/imgs',
         },
       },
     ],
