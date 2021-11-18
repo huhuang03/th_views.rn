@@ -1,6 +1,6 @@
 {
   "name": "th_views.rn",
-  "version": "0.0.2-rc.6",
+  "version": "0.0.2-rc.9",
   "main": "src/index.ts",
   "license": "MIT",
   "source": "src/index.ts",
@@ -15,11 +15,12 @@
   ],
   "dependencies": {
     "@zfkcyjy/react-native-fast-image": "^8.5.11-rc.1",
-    "react": "*",
-    "react-native": "*",
     "th_comm.rn": "^0.0.4-alpha.9"
   },
-  "peerDependencies": {},
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
   "devDependencies": {
     "@babel/runtime": "^7.16.3",
     "@types/react-native": "^0.64.2",
