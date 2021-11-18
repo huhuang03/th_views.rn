@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Image, ImageSourcePropType, ImageProps, ImageURISource} from 'react-native';
-import FastImage, {ResizeMode} from '@zfkcyjy/react-native-fast-image';
+import {Image, ImageProps, ImageURISource} from 'react-native';
+import FastImage from '@zfkcyjy/react-native-fast-image';
 import {getResizeMode} from './util/_util';
 
 /**

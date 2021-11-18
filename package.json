@@ -1,7 +1,7 @@
 {
   "name": "th_views.rn",
-  "version": "0.0.2-rc.1",
-  "main": "lib/index.js",
+  "version": "0.0.2-rc.6",
+  "main": "src/index.ts",
   "license": "MIT",
   "source": "src/index.ts",
   "types": "lib/index.d.ts",
@@ -10,12 +10,13 @@
     "prepublish": "yarn run build"
   },
   "files": [
-    "lib"
+    "lib",
+    "src"
   ],
   "dependencies": {
     "@zfkcyjy/react-native-fast-image": "^8.5.11-rc.1",
-    "react": "^17.0.2",
-    "react-native": "^0.66.3",
+    "react": "*",
+    "react-native": "*",
     "th_comm.rn": "^0.0.4-alpha.9"
   },
   "peerDependencies": {},

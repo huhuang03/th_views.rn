@@ -1,13 +1,3 @@
-import {default as SizedBox} from './SizedBox'
-import {default as Line} from './Line'
-import {default as ImageWithLoadingAndCache} from './image-with-loading-and-cache/ImgWithLoadingAndCache'
-
-
-export {
-  SizedBox,
-  Line,
-  ImageWithLoadingAndCache
-    // LoadView2,
-    // LoadViewConfig,
-    // ListLoadView
-}
+export {default as ImgWithLoadingAndCache, ImgWithLoadingAndCacheProps} from './image-with-loading-and-cache/ImgWithLoadingAndCache'
+export {default as SizedBox, SizedBoxProps} from './SizedBox'
+export {default as Line, LineProps} from './Line'
