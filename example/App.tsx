@@ -11,14 +11,12 @@ import {
 
 import {
   Colors,
-  DebugInstructions,
   Header,
-  LearnMoreLinks,
-  ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 // so you can't parse babel.config.js?
 import {Line} from 'th_views.rn';
 import ExampleImage from "./src/ExampleImage";
+import ExampleFakeTab from './src/ExampleFakeTab';
 
 const Section: React.FC<{
   title: string;
@@ -72,7 +70,7 @@ const App = () => {
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <ExampleImage />
+          <ExampleFakeTab />
         </View>
       </ScrollView>
     </SafeAreaView>

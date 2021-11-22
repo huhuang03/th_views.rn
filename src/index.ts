@@ -2,3 +2,4 @@ export {default as ImgWithLoadingAndCache, ImgWithLoadingAndCacheProps} from './
 export {default as SizedBox, SizedBoxProps} from './SizedBox'
 export {default as Line, LineProps} from './Line'
 export {default as Expander, ExpanderProps} from './Expander'
+export {default as FakeTab, FakeTabProps} from './FakeTab'
