@@ -3,6 +3,8 @@ export interface DropFilterModel {
   code: string;
 }
 
+// 暂时先做简单一点，因为我们还有想好怎么去规划code.
+
 // all common means I dont give the code?
 // what to pass if we choice all in level2?
 // I think we should not care about the all select.
@@ -15,15 +17,31 @@ export interface DropFilterItem {
   }[]
 }
 
+export interface DropFilterItemLeaf {
+  name: string;
+  code: string;
+}
+
+export interface DropFilterItemWithNext {
+  name: string;
+  next: DropFilterItemWithNext[];
+}
 
 export interface DropFilterData {
   items: {
     name: string;
+    next: {
+      name: string;
+      next: {
+        name: string;
+        next: DropFilterModel[],
+      }[]
+    }[]
   }[];
 
-  other: {
-    title: string;
-    values: DropFilterData[];
+  others: {
+    name: string;
+    values: DropFilterModel[];
   }[]
 
 }

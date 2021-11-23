@@ -2,10 +2,22 @@ import React, {ReactElement, ReactNodeArray, useMemo, useState} from 'react';
 import {View, Text, ViewStyle, StyleSheet, Pressable} from 'react-native';
 import {gDp} from 'th_comm.rn';
 
+// too many style, we need struct
 export interface FakeTabProps {
   style?: ViewStyle;
+
+  /**
+   * style集合。用于设置样式
+   */
+  styles?: {
+    tabBar?: {
+      /**
+       * tabBarItem最外层的view。默认是加了paddingHorizontal gDp(60)
+       */
+      container?: ViewStyle;
+    }
+  }
   tabStyle?: ViewStyle;
-  itemStyle?: ViewStyle;
   selectedItemStyle?: ViewStyle;
   underlineStyle?: ViewStyle;
   contentStyle?: ViewStyle;
@@ -48,16 +60,22 @@ const FakeTab: React.FC<FakeTabProps> = props => {
       }}>
       <View
         style={{
-          alignItems: 'center',
+          paddingHorizontal: gDp(30),
+          ...props.styles?.tabBar?.container
         }}>
-        <Text style={styles.tabBarText}>
-          {_getTitleText(index)}
-        </Text>
         <View
           style={{
-            ...styles.underLine,
-            backgroundColor: _isSelected(index)? styles.underLine.backgroundColor: 'transfer',
+            alignItems: 'center',
           }}>
+          <Text style={{...styles.tabBarText}}>
+            {_getTitleText(index)}
+          </Text>
+          <View
+            style={{
+              ...styles.underLine,
+              backgroundColor: _isSelected(index)? styles.underLine.backgroundColor: 'transfer',
+            }}>
+          </View>
         </View>
       </View>
     </Pressable>
@@ -93,7 +111,6 @@ const FakeTab: React.FC<FakeTabProps> = props => {
 
 const styles = StyleSheet.create({
   tabBarText: {
-    paddingHorizontal: gDp(30),
     fontWeight: 'bold',
     fontSize: gDp(28),
     color: '#333',
