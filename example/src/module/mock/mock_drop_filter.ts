@@ -1,6 +1,6 @@
 import {DropFilterData} from 'th_views.rn';
 
-export const dropFilterData: DropFilterData = {
+export const mockDropFilterData: DropFilterData = {
   items: [
     {
       name: '分类',

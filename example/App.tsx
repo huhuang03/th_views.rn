@@ -7,10 +7,8 @@ import {
   View,
 } from 'react-native';
 
-import {Colors, Header} from 'react-native/Libraries/NewAppScreen';
-// so you can't parse babel.config.js?
-import {Line} from 'th_views.rn';
-import ExampleFakeTab from './src/ExampleFakeTab';
+import {Colors} from 'react-native/Libraries/NewAppScreen';
+import ExampleDropFilter from './src/ExampleDropFilter';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -25,18 +23,11 @@ const App = () => {
       <ScrollView
         contentInsetAdjustmentBehavior="automatic"
         style={backgroundStyle}>
-        <Header />
-        <Line
-          style={{
-            backgroundColor: 'red',
-          }}
-          height={100}
-        />
         <View
           style={{
             backgroundColor: isDarkMode ? Colors.black : Colors.white,
           }}>
-          <ExampleFakeTab />
+          <ExampleDropFilter />
         </View>
       </ScrollView>
     </SafeAreaView>

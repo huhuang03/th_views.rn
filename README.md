@@ -1,8 +1,10 @@
 # TODOS
 ## fakeTab
 - tabBarItem style.
-## other
+## LoadList
 - how to handle that fist load need load more?
 - load more indicator.
-- first refresh and then then others
+- first refresh and then others
 - show the error
+## other
+- should I introduce in FontAwesome?
