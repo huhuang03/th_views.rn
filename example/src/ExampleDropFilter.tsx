@@ -1,13 +1,19 @@
 import React from 'react';
-import {View, Text} from 'react-native';
 import {DropFilterView} from 'th_views.rn';
 import {mockDropFilterData} from './module/mock/mock_drop_filter';
+import {View} from 'react-native';
 
 export interface ExampleDropFilterProps {}
 
 const ExampleDropFilter: React.FC<ExampleDropFilterProps> = props => {
   return (
-    <DropFilterView data={mockDropFilterData} onChanged={() => {}} />
+    <View
+      style={{
+        flex: 1,
+        backgroundColor: 'red',
+      }}>
+      <DropFilterView data={mockDropFilterData} onChanged={() => {}} />
+    </View>
   );
 };
 

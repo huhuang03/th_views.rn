@@ -1,6 +1,8 @@
+export type Code = number | string;
+
 export interface DropFilterModel {
   name: string;
-  code: string;
+  code: string | number;
 }
 
 // 暂时先做简单一点，因为我们还有想好怎么去规划code.
@@ -41,7 +43,8 @@ export interface DropFilterData {
 
   others: {
     name: string;
-    values: DropFilterModel[];
+    code: string;
+    list: DropFilterModel[];
   }[]
 
 }
@@ -49,12 +52,24 @@ export interface DropFilterData {
 /**
  * yes we present the full(full means if the user select nothing, we still need to provider a placeholder) select state
  */
-export interface DropFilterSelectState {
+export interface DropFilterSelect {
   items: {
     choice: string[];
   }[],
 
   others: {
-    choice: string[];
-  }[]
+    [key: string]: Code[],
+    [key: number]: Code[],
+  }
+}
+
+export const DropFilterSelectMethod = {
+  other: {
+    getSelected(code: Code, others: DropFilterSelect['others']): Code[] {
+      if (others[code] === undefined) {
+        others[code] = [];
+      }
+      return others[code];
+    }
+  }
 }

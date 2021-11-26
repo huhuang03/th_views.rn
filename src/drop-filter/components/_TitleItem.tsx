@@ -1,24 +1,29 @@
 import React from 'react';
 import {View, Text, Pressable} from 'react-native';
+import {gDp} from 'th_comm.rn';
 
 export interface _TitleItemProps {
   title: string;
   isOther: boolean;
-  isExpand: string;
-  onClick: () => void;
+  isExpand: boolean;
+  onClick: (isExpand: boolean) => void;
 }
 
 const _TitleItem: React.FC<_TitleItemProps> = props => {
 
   return (
     <Pressable
-      onPress={props.onClick}>
+      onPress={() => props.onClick(props.isExpand)}>
       <View
         style={{
+          paddingHorizontal: gDp(50),
+          alignItems: 'center',
+          height: '100%',
           flexDirection: 'row'
         }}>
         <Text
           style={{
+            fontSize: gDp(24),
             color: props.isExpand? '#FC6600' : '#3C3C3C'
           }}>{props.title}</Text>
       </View>
