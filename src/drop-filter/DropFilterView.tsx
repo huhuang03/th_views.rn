@@ -89,6 +89,8 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
   // how to all the expand?
   // for now we ignore?
   const _ContentItem = () => {
+    // how can you update the data?
+
     const itemDataL0 = data.main.list![index];
     let _selectL0 = DropFilterSelectMethod.main.getL0Select(index, select.main);
     console.log('_select 0: ', _selectL0);

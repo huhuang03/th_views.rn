@@ -7,12 +7,13 @@ export interface DropFilterModel {
 }
 
 // 暂时先做简单一点，因为我们还有想好怎么去规划code.
-
 export interface DropFilterDataItem {
   level: number;
   name: string;
   code: Code;
   list?: DropFilterDataItem[];
+  // 懒加载，通过上一个选择去获取
+  listLoader?: (_s: DropFilterSelectItem) => Promise<DropFilterDataItem>;
 }
 
 export interface DropFilterData {
@@ -66,6 +67,17 @@ export const DropFilterSelectMethod = {
   },
 
   main: {
+    getSelect(level: number, rootSelect: DropFilterSelectItem): DropFilterSelectItem | undefined {
+      let select: DropFilterSelectItem | undefined = rootSelect;
+      while (select) {
+        if (select.level === level) {
+          return select;
+        }
+        select = select.child;
+      }
+      return undefined;
+    },
+
     getL0Select(index: number, thiz: DropFilterSelect['main']): DropFilterSelect['main'][0] {
       if (!thiz[index]) {
         thiz[index] = {

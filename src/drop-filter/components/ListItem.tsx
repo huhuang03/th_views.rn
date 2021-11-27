@@ -8,7 +8,7 @@ export interface ListItemProps {
   title: string;
   onClick: (model: DropFilterModel, isAll: boolean) => void;
   backgroundColor: ColorValue;
-  data: DropFilterDataItem;
+  data?: DropFilterDataItem;
   select?: DropFilterSelectItem;
 }
 
@@ -22,7 +22,7 @@ interface Item {
 const ListItem: React.FC<ListItemProps> = props => {
   const {data, select, title, onClick} = props;
   // console.log('data: ', data);
-  const hasNext = data.list && data.list.length > 0;
+  const hasNext = data?.list && data?.list.length > 0;
 
   const items = useMemo(() => {
     const rst: Item[] = [];
@@ -35,7 +35,7 @@ const ListItem: React.FC<ListItemProps> = props => {
       })
     }
 
-    for (const item of data.list?? []) {
+    for (const item of data?.list?? []) {
       // console.log('item.code: ', item.code, ', select.code: ', select?.code, ', select: ', select);
       rst.push({
         title: item.name,
