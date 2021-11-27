@@ -1,12 +1,12 @@
 import React, {useMemo} from 'react';
 import {Text, ColorValue, FlatList, ViewStyle, View, Pressable} from 'react-native';
 import {gDp} from 'th_comm.rn';
-import {Code, CODE_ALL, DropFilterDataItem, DropFilterSelectItem} from '../model';
+import {Code, CODE_ALL, DropFilterDataItem, DropFilterModel, DropFilterSelectItem} from '../model';
 
 export interface ListItemProps {
   style?: ViewStyle;
   title: string;
-  onClick: (code: Code, isAll: boolean) => void;
+  onClick: (model: DropFilterModel, isAll: boolean) => void;
   backgroundColor: ColorValue;
   data: DropFilterDataItem;
   select?: DropFilterSelectItem;
@@ -62,7 +62,10 @@ const ListItem: React.FC<ListItemProps> = props => {
         renderItem={item => {
           return <Pressable
             onPress={() => {
-              onClick(item.item.code, item.item.isAll);
+              onClick({
+                code: item.item.code,
+                name: item.item.title
+              }, item.item.isAll);
             }}
             style={{
               flex: 1,

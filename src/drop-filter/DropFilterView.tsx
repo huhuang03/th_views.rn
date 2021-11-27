@@ -1,6 +1,13 @@
 import React, {useState} from 'react';
 import {useWindowDimensions, View} from 'react-native';
-import {CODE_ALL, DropFilterData, DropFilterDataMethod, DropFilterSelect, DropFilterSelectMethod} from './model';
+import {
+  CODE_ALL,
+  DropFilterData,
+  DropFilterDataMethod,
+  DropFilterModel,
+  DropFilterSelect,
+  DropFilterSelectMethod
+} from './model';
 import _TitleItem from './components/_TitleItem';
 import {isEmptyArray} from '../module/util/util.js';
 import {gDp} from 'th_comm.rn';
@@ -23,11 +30,22 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
     others: {},
   })
 
-  const _handleConfirm = (confirm?: boolean) => {
+  const [mainNames, setMainNames] = useState<string[]>([]);
+
+  /**
+   * @param mainIndex 当前index
+   * @param model 当前选中
+   * @param confirm 是否能确定选中（既需要收起了）
+   */
+  const _handleMainConfirm = (mainIndex: number, model: DropFilterModel, confirm?: boolean) => {
     setSelect({
       ...select,
     })
+
     if (confirm) {
+      console.log('mainIndex: ', mainIndex, 'model: ', model);
+      mainNames[mainIndex] = model.name;
+      setMainNames([...mainNames]);
       setIndex(INDEX_COLSPAN);
       onConfirm?.(select)
     }
@@ -54,8 +72,9 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
       }}>
       {data.main.list!.map((item, i) => {
         // fuck, how to fix the title?
+        let _title =  mainNames[i] || item.name;
         return (
-          <_TitleItem key={i.toString()} title={item.name} isOther={false} isExpand={i === index} onClick={isExpand => {
+          <_TitleItem key={i.toString()} title={_title} isOther={false} isExpand={i === index} onClick={isExpand => {
             setIndex(isExpand ? INDEX_COLSPAN : i);
           }}/>);
       })}
@@ -95,9 +114,9 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
         }}
         title={itemDataL0.name}
         onClick={(code, isAll) => {
-          _selectL0.code = code;
-          _selectL0.isAll = code === CODE_ALL;
-          _handleConfirm(code === CODE_ALL);
+          _selectL0.code = code.code;
+          _selectL0.isAll = code.code === CODE_ALL;
+          _handleMainConfirm(index, code, code.code === CODE_ALL);
         }}
         backgroundColor={'white'}
         data={{...itemDataL0}}
@@ -111,13 +130,13 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
         }}
         title={itemDataL1.name}
         onClick={(code, isAll) => {
-          if (_selectL0.child?.code != code) {
+          if (_selectL0.child?.code != code.code) {
             _selectL0.child = {
               level: _selectL0.level + 1,
-              code: code,
-              isAll: code === CODE_ALL,
+              code: code.code,
+              isAll: code.code === CODE_ALL,
             }
-            _handleConfirm(code === CODE_ALL);
+            _handleMainConfirm(index, code, code.code === CODE_ALL);
           }
         }}
         backgroundColor={'white'}
@@ -133,14 +152,14 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
             height: '100%',
           }}
           title={itemDataL2.name}
-          onClick={(code, isAll) => {
-            if (_selectL1?.child?.code != code) {
+          onClick={(model, isAll) => {
+            if (_selectL1?.child?.code != model.code) {
               _selectL1!.child = {
                 level: _selectL1!.level + 1,
-                code: code,
-                isAll: code === CODE_ALL,
+                code: model.code,
+                isAll: model.code === CODE_ALL,
               }
-              _handleConfirm(true);
+              _handleMainConfirm(index, model, true);
             }
           }}
           backgroundColor={'white'}

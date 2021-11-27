@@ -3,7 +3,7 @@ export const CODE_ALL = -1;
 
 export interface DropFilterModel {
   name: string;
-  code: string | number;
+  code: Code;
 }
 
 // 暂时先做简单一点，因为我们还有想好怎么去规划code.
