@@ -10,9 +10,13 @@ const ExampleDropFilter: React.FC<ExampleDropFilterProps> = props => {
     <View
       style={{
         flex: 1,
-        backgroundColor: 'red',
       }}>
-      <DropFilterView data={mockDropFilterData} onChanged={() => {}} />
+      <DropFilterView
+        data={mockDropFilterData}
+        onConfirm={select => {
+          console.log('select: ', select);
+        }}
+      />
     </View>
   );
 };

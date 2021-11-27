@@ -21,21 +21,13 @@ const App = () => {
   return (
     <SafeAreaView style={backgroundStyle}>
       <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentContainerStyle={{
-          height: '100%',
-          flex: 1,
-        }}
+      <View
         style={{
-          ...backgroundStyle,
+          backgroundColor: 'white',
+          flex: 1,
         }}>
-        <View
-          style={{
-            backgroundColor: 'white',
-          }}>
-          <ExampleDropFilter />
-        </View>
-      </ScrollView>
+        <ExampleDropFilter />
+      </View>
     </SafeAreaView>
   );
 };

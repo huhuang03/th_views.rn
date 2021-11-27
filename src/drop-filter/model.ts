@@ -1,4 +1,5 @@
 export type Code = number | string;
+export const CODE_ALL = -1;
 
 export interface DropFilterModel {
   name: string;
@@ -7,55 +8,46 @@ export interface DropFilterModel {
 
 // 暂时先做简单一点，因为我们还有想好怎么去规划code.
 
-// all common means I dont give the code?
-// what to pass if we choice all in level2?
-// I think we should not care about the all select.
-// let the caller care, we only need tell the caller, that the use selected the all?
-// hot to present the item all?
-export interface DropFilterItem {
+export interface DropFilterDataItem {
+  level: number;
   name: string;
-  next: {
-    name: string;
-  }[]
-}
-
-export interface DropFilterItemLeaf {
-  name: string;
-  code: string;
-}
-
-export interface DropFilterItemWithNext {
-  name: string;
-  next: DropFilterItemWithNext[];
+  code: Code;
+  list?: DropFilterDataItem[];
 }
 
 export interface DropFilterData {
-  items: {
-    name: string;
-    next: {
-      name: string;
-      next: {
-        name: string;
-        next: DropFilterModel[],
-      }[]
-    }[]
-  }[];
+  main: DropFilterDataItem;
 
   others: {
     name: string;
     code: string;
     list: DropFilterModel[];
   }[]
+}
 
+export const DropFilterDataMethod = {
+  getItemByCode: (code?: Code, thiz?: DropFilterDataItem): DropFilterDataItem | undefined => {
+    return thiz?.list?.filter(item => item.code === code)[0] || undefined;
+  }
+}
+
+
+// how to present all?
+export interface DropFilterSelectItem {
+  isAll?: boolean;
+  code?: Code;
+  level: number;
+  child?: DropFilterSelectItem;
 }
 
 /**
  * yes we present the full(full means if the user select nothing, we still need to provider a placeholder) select state
  */
 export interface DropFilterSelect {
-  items: {
-    choice: string[];
-  }[],
+  main: {
+    // key is index.
+    [key: number]: DropFilterSelectItem
+  },
 
   others: {
     [key: string]: Code[],
@@ -71,5 +63,16 @@ export const DropFilterSelectMethod = {
       }
       return others[code];
     }
+  },
+
+  main: {
+    getL0Select(index: number, thiz: DropFilterSelect['main']): DropFilterSelect['main'][0] {
+      if (!thiz[index]) {
+        thiz[index] = {
+          level: 0,
+        };
+      }
+      return thiz[index];
+    },
   }
 }

@@ -54,12 +54,12 @@ const _OtherView: React.FC<_OtherViewProps> = props => {
 
           return (<Pressable
             onPress={() => {
-              console.log('on item clicked, _isSelect: ', _isSelect);
+              // console.log('on item clicked, _isSelect: ', _isSelect);
               if (_isSelect) {
                 _select.splice(_select.indexOf(item1.code), 1);
               } else {
                 _select.push(item1.code);
-                console.log('_select: ', _select);
+                // console.log('_select: ', _select);
               }
               console.log('set select: ', select);
               setSelect({...select});
