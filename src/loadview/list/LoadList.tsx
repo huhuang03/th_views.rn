@@ -23,7 +23,7 @@ export interface ListDataHandler<L, D> {
 }
 
 /**
- * 怎么处理分页参数？？
+ * 这个LoadList暂时先不管用。放在这里当备份
  */
 export interface LoadListProps<L, D> {
     listDataHandler: ListDataHandler<L, D>;

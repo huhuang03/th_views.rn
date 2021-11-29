@@ -1,7 +1,7 @@
 import React from 'react';
 import {View} from 'react-native';
-import {ImageWithLoadingAndCache} from 'th_views.rn';
-import {IMG} from './cons/cons';
+import {ImgWithLoadingAndCache} from 'th_views.rn';
+import {IMG} from './module/cons/cons';
 
 export interface ExampleImageProps {}
 
@@ -9,7 +9,7 @@ const ExampleImage: React.FC<ExampleImageProps> = props => {
   const img = require('@imgs/loading.png');
   return (
     <View>
-      <ImageWithLoadingAndCache
+      <ImgWithLoadingAndCache
         source={{uri: IMG}}
         style={{
           width: 100,
