@@ -1,5 +1,5 @@
 # TODOS
-## fakeTab
+## FakeTab
 - tabBarItem style.
 ## LoadList
 - how to handle that fist load need load more?

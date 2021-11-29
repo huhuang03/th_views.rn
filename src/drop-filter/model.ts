@@ -17,7 +17,8 @@ export interface DropFilterDataItem {
 }
 
 export interface DropFilterData {
-  main: DropFilterDataItem;
+  // this is not good?
+  main: DropFilterDataItem[];
 
   others: {
     name: string;

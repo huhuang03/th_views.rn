@@ -56,7 +56,7 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
   }
 
   const isSelectOther = () => {
-    return index == data.main.list!.length;
+    return index == data.main.length;
   }
 
   // ok, let's do somethings
@@ -70,7 +70,7 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
         alignItems: 'center',
         justifyContent: 'space-around',
       }}>
-      {data.main.list!.map((item, i) => {
+      {data.main.map((item, i) => {
         // fuck, how to fix the title?
         let _title =  mainNames[i] || item.name;
         return (
@@ -81,7 +81,7 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
       {!isEmptyArray(data.others) && <_TitleItem
           key={data.others.length.toString()}
           title={'筛选'} isOther={true} isExpand={isSelectOther()} onClick={(isExpand) => {
-        setIndex(isExpand? INDEX_COLSPAN : data.main.list!.length);
+        setIndex(isExpand? INDEX_COLSPAN : data.main.length);
       }} />}
     </View>)
   }
@@ -91,7 +91,7 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
   const _ContentItem = () => {
     // how can you update the data?
 
-    const itemDataL0 = data.main.list![index];
+    const itemDataL0 = data.main[index];
     let _selectL0 = DropFilterSelectMethod.main.getL0Select(index, select.main);
     console.log('_select 0: ', _selectL0);
 

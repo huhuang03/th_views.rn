@@ -50,7 +50,7 @@ const _OtherView: React.FC<_OtherViewProps> = props => {
         }}>
         {item.list.map((item1, index) => {
           console.log('_select: ', _select, ', code: ', item1.code);
-          const _isSelect = _select.includes(item1.code);
+          const _isSelect = _select.indexOf(item1.code) >= 0;
 
           return (<Pressable
             onPress={() => {
