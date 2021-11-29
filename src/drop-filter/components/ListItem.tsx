@@ -19,6 +19,8 @@ interface Item {
   isSelected: boolean;
 }
 
+// can you update when the dataLoader changed?
+// Ok, the question is that can I update when parent select changed?
 const ListItem: React.FC<ListItemProps> = props => {
   const {data, select, title, onClick} = props;
   // console.log('data: ', data);
