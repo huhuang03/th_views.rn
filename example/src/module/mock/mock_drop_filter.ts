@@ -1,4 +1,4 @@
-import {CODE_ALL, DropFilterData, DropFilterDataItem} from 'th_views.rn';
+import {CODE_ALL, DropFilterData, DFDataItem} from 'th_views.rn';
 
 export const mockDropFilterData: DropFilterData = {
   main: {
@@ -2964,7 +2964,7 @@ const rawData = [
 // ok parse the data
 for (const rawL1 of rawData) {
   // level 1
-  const itemL1: DropFilterDataItem = {
+  const itemL1: DFDataItem = {
     level: 1,
     name: rawL1.cateName,
     code: rawL1.id,
@@ -2975,7 +2975,7 @@ for (const rawL1 of rawData) {
 
   // level 2
   for (const rawL2 of rawL1.cateList) {
-    const itemL2: DropFilterDataItem = {
+    const itemL2: DFDataItem = {
       level: 2,
       name: rawL2.cateName,
       code: rawL2.id,
@@ -2984,7 +2984,7 @@ for (const rawL1 of rawData) {
     itemL1.list?.push(itemL2);
 
     for (const rawL3 of rawL2.cateList) {
-      const itemL3: DropFilterDataItem = {
+      const itemL3: DFDataItem = {
         level: 2,
         name: rawL3.cateName,
         code: rawL3.id,

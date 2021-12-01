@@ -4,14 +4,14 @@ import {
   CODE_ALL,
   DropFilterData,
   DropFilterDataMethod,
-  DropFilterModel,
+  DFModel,
   DropFilterSelect,
   DropFilterSelectMethod
 } from './model';
 import _TitleItem from './components/_TitleItem';
 import {isEmptyArray} from '../module/util/util.js';
 import {gDp} from 'th_comm.rn';
-import ListItem from './components/ListItem';
+import DFListItem from './components/DFListItem';
 import _OtherView from './components/other/_OtherView';
 
 export interface DropFilterViewProps {
@@ -37,7 +37,7 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
    * @param model 当前选中
    * @param confirm 是否能确定选中（既需要收起了）
    */
-  const _handleMainConfirm = (mainIndex: number, model: DropFilterModel, confirm?: boolean) => {
+  const _handleMainConfirm = (mainIndex: number, model: DFModel, confirm?: boolean) => {
     setSelect({
       ...select,
     })
@@ -108,7 +108,7 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
         flexDirection: 'row',
       }}>
 
-      <ListItem
+      <DFListItem
         key={"0"}
         style={{
           flex: 1,
@@ -124,7 +124,7 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
         data={{...itemDataL0}}
         select={_selectL0} />
 
-      {itemDataL1 && <ListItem
+      {itemDataL1 && <DFListItem
         key={"1"}
         style={{
           flex: 1,
@@ -147,7 +147,7 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
         }}
         select={_selectL1} /> || <View key={'empty_1'} style={{flex: 1}} />}
 
-      {itemDataL2 && <ListItem
+      {itemDataL2 && <DFListItem
           key={"2"}
           style={{
             flex: 1,

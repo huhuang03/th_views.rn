@@ -1,45 +1,54 @@
 export type Code = number | string;
 export const CODE_ALL = -1;
 
-export interface DropFilterModel {
+export interface DFModel {
   name: string;
   code: Code;
 }
 
 // 暂时先做简单一点，因为我们还有想好怎么去规划code.
-export interface DropFilterDataItem {
+export interface DFDataItem extends DFModel {
   level: number;
-  name: string;
-  code: Code;
-  list?: DropFilterDataItem[];
+  list?: DFDataItem[];
   // 懒加载，通过上一个选择去获取
-  listLoader?: (_s: DropFilterSelectItem) => Promise<DropFilterDataItem>;
+  listLoader?: (_s: DFSelectItem) => Promise<DFDataItem>;
+}
+
+export const DFDataItemMethod = {
+  isSelect(thiz: DFDataItem, select?: DFSelectItem): boolean {
+    return thiz.code == select?.code;
+  }
+  // td
+  // hasNext(thiz?: DFDataItem): boolean {
+  //   return !!thiz && (thiz.list && thiz.list.length > 0) || !!thiz?.listLoader;
+  // }
 }
 
 export interface DropFilterData {
   // this is not good?
-  main: DropFilterDataItem[];
+  main: DFDataItem[];
 
   others: {
     name: string;
     code: string;
-    list: DropFilterModel[];
+    list: DFModel[];
   }[]
 }
 
 export const DropFilterDataMethod = {
-  getItemByCode: (code?: Code, thiz?: DropFilterDataItem): DropFilterDataItem | undefined => {
+  getItemByCode: (code?: Code, thiz?: DFDataItem): DFDataItem | undefined => {
     return thiz?.list?.filter(item => item.code === code)[0] || undefined;
   }
 }
 
 
 // how to present all?
-export interface DropFilterSelectItem {
+export interface DFSelectItem {
+  select?: DFSelectItem;
   isAll?: boolean;
   code?: Code;
   level: number;
-  child?: DropFilterSelectItem;
+  child?: DFSelectItem;
 }
 
 /**
@@ -48,7 +57,7 @@ export interface DropFilterSelectItem {
 export interface DropFilterSelect {
   main: {
     // key is index.
-    [key: number]: DropFilterSelectItem
+    [key: number]: DFSelectItem
   },
 
   others: {
@@ -68,8 +77,8 @@ export const DropFilterSelectMethod = {
   },
 
   main: {
-    getSelect(level: number, rootSelect: DropFilterSelectItem): DropFilterSelectItem | undefined {
-      let select: DropFilterSelectItem | undefined = rootSelect;
+    getSelect(level: number, rootSelect: DFSelectItem): DFSelectItem | undefined {
+      let select: DFSelectItem | undefined = rootSelect;
       while (select) {
         if (select.level === level) {
           return select;
