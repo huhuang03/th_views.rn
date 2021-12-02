@@ -57,6 +57,7 @@ const PromptModal: React.FC<PromptModalProps> = props => {
             showSoftInputOnFocus={true}
             autoFocus={true}
             style={{
+              paddingLeft: gDp(2),
               fontSize: gDp(30),
               borderColor: 'gray',
               borderWidth: gDp(1),
