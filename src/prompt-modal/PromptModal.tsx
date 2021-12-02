@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, Button, Modal, TextInput, TextInputProps} from 'react-native';
+import React, {useEffect, useRef, useState} from 'react';
+import {View, Button, Modal, TextInput, TextInputProps} from 'react-native';
 import SizedBox from '../SizedBox';
 import {gDp} from 'th_comm.rn';
 
@@ -11,9 +11,21 @@ export interface PromptModalProps {
 
 const PromptModal: React.FC<PromptModalProps> = props => {
   const [text, setText] = useState<string>('')
+  const ref = useRef<TextInput>();
+
+  useEffect(() => {
+    if (props.show)  {
+      // clear the text when show changed.
+      setText('')
+    }
+  }, [props.show])
 
   return (
     <Modal
+      onShow={() => {
+        ref.current?.blur();
+        ref.current?.focus();
+      }}
       transparent={true}
       style={{
         flex: 1,
@@ -32,23 +44,23 @@ const PromptModal: React.FC<PromptModalProps> = props => {
         }}>
         <View
           style={{
-            paddingVertical: gDp(10),
-            paddingHorizontal: gDp(20),
+            paddingVertical: gDp(30),
+            paddingHorizontal: gDp(30),
             borderRadius: gDp(20),
             backgroundColor: 'white',
+            width: '100%',
           }}>
-          <View
+          <TextInput
+            ref={_ref => ref.current = (_ref || undefined)}
+            showSoftInputOnFocus={true}
+            autoFocus={true}
             style={{
-              width: '100%',
-            }}>
-            <TextInput
-              style={{
-                borderColor: 'gray',
-                borderWidth: gDp(1),
-              }}
-              onChangeText={setText}
-              {...props.input} />
-          </View>
+              fontSize: gDp(30),
+              borderColor: 'gray',
+              borderWidth: gDp(1),
+            }}
+            onChangeText={setText}
+            {...props.input} />
           <View
             style={{
               marginTop: gDp(20),

@@ -18,6 +18,7 @@ const ExamplePromptModal: React.FC<ExamplePromptModalProps> = props => {
       <PromptModal
         show={show}
         onDismiss={(_text, isConfirm) => {
+          // console.log('_text: ', _text, ', isConfirm: ', isConfirm);
           setShow(false);
           if (isConfirm) {
             setText(_text);
