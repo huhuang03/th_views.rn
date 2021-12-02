@@ -1,6 +1,6 @@
 {
   "name": "th_views.rn",
-  "version": "0.0.4.alpha.1",
+  "version": "0.0.4-rc.1",
   "main": "src/index.ts",
   "license": "MIT",
   "source": "src/index.ts",
@@ -14,7 +14,7 @@
     "src"
   ],
   "dependencies": {
-    "@zfkcyjy/react-native-fast-image": "^8.5.11-rc.1",
+    "@zfkcyjy/react-native-fast-image": "^8.5.11-rc.1"
   },
   "peerDependencies": {
     "react": "*",

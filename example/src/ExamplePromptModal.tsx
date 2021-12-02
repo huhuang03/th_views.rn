@@ -16,6 +16,9 @@ const ExamplePromptModal: React.FC<ExamplePromptModalProps> = props => {
       <Text>input: {text}</Text>
       <Button title={'show'} onPress={() => setShow(true)} />
       <PromptModal
+        input={{
+          placeholder: '请输入名称',
+        }}
         show={show}
         onDismiss={(_text, isConfirm) => {
           // console.log('_text: ', _text, ', isConfirm: ', isConfirm);
