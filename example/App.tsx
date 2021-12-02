@@ -1,11 +1,11 @@
 import React from 'react';
 import {
   SafeAreaView,
-  StatusBar, Text,
+  StatusBar,
   useColorScheme,
   View,
 } from 'react-native';
-import ExampleImage from './src/ExampleImage';
+import ExamplePromptModal from './src/ExamplePromptModal';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -24,7 +24,8 @@ const App = () => {
           flex: 1,
         }}>
         {/*<ExampleDropFilter />*/}
-        <ExampleImage />
+        {/*<ExampleImage />*/}
+        <ExamplePromptModal />
       </View>
     </SafeAreaView>
   );

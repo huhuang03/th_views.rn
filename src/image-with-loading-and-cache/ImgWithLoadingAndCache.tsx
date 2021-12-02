@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {ColorValue, Image, ImageProps, ImageURISource, View} from 'react-native';
+import {Image, ImageProps, ImageURISource, View} from 'react-native';
 import FastImage from '@zfkcyjy/react-native-fast-image';
 import {getResizeMode} from './util/_util';
 
