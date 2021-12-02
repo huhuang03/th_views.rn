@@ -9,7 +9,7 @@ export interface ListItemProps {
 
   style?: ViewStyle;
   backgroundColor?: ColorValue;
-  data?: DFDataItem[];
+  data?: DFDataItem;
 
   select?: DFSelectItem;
   addAll?: boolean;
@@ -18,9 +18,10 @@ export interface ListItemProps {
 // what's the right behavior when parent choice has change?
 // should I update?
 const DFListItem: React.FC<ListItemProps> = props => {
-  const {data = [], title, onClick, addAll = true} = props;
+  const {data, title, onClick, addAll = true} = props;
   const [select, setSelect] = useState(props.select);
-  const level = data?.[0].level ?? -1;
+  const list = data?.list?? []
+  const level = (data?.level?? 0) + 1
 
   useEffect(() => {
     setSelect(props.select)
@@ -35,7 +36,7 @@ const DFListItem: React.FC<ListItemProps> = props => {
         code: CODE_ALL,
       })
     }
-    rst.push(...data);
+    rst.push(...list);
     return rst;
   }, [data, select?.code])
 
@@ -47,6 +48,7 @@ const DFListItem: React.FC<ListItemProps> = props => {
       }}
       >
       <FlatList<DFDataItem>
+        keyExtractor={((item, index) => `${item.level}-${item.code}-${index}`)}
         data={items}
         renderItem={item => {
           return <Pressable

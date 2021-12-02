@@ -348,7 +348,7 @@ semver@^6.0.0:
 
 th_comm.rn@^0.0.4-alpha.9:
   version "0.0.4-alpha.9"
-  resolved "https://registry.npmjs.org/th_comm.rn/-/th_comm.rn-0.0.4-alpha.9.tgz#45276107398bc30befbb707436bf9313b73900f4"
+  resolved "https://registry.yarnpkg.com/th_comm.rn/-/th_comm.rn-0.0.4-alpha.9.tgz#45276107398bc30befbb707436bf9313b73900f4"
   integrity sha512-TpXFpMiV3Y0xkMAdi8pO0z2+87psbArzi1yGH41GWK/uiruLJkXJFHBY5XxwdGzx/Toyr9ra3eOV+P0L+4E1cw==
 
 tslib@2.1.0:

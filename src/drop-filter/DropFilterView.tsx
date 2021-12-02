@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useWindowDimensions, View} from 'react-native';
+import {Text, useWindowDimensions, View} from 'react-native';
 import {
   DropFilterData,
   DFModel,
@@ -9,7 +9,7 @@ import _TitleItem from './components/_TitleItem';
 import {isEmptyArray} from '../module/util/util.js';
 import {gDp} from 'th_comm.rn';
 import DFListItem from './components/DFListItem';
-import _OtherView from './components/other/_OtherView';
+// import _OtherView from './components/other/_OtherView';
 import DFStaticContent from './components/DFStaticContent';
 
 export interface DropFilterViewProps {
@@ -96,7 +96,8 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
 
   const _ContentOther = () => {
     // why you height can't be right?
-    return <_OtherView others={data.others} onConfirm={() => {}} />
+    return <Text>Impl me</Text>
+    // return <_OtherView others={data.others} onConfirm={() => {}} />
   }
 
   return (

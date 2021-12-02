@@ -19,6 +19,10 @@ export interface DFDataItem extends DFModel {
 export const DFDataItemMethod = {
   isSelect(thiz: DFDataItem, select?: DFSelectItem): boolean {
     return thiz.code == select?.code;
+  },
+
+  isSelect(thiz: DFDataItem, item?: DFDataItem): boolean {
+    return thiz.code == select?.code;
   }
   // td
   // hasNext(thiz?: DFDataItem): boolean {

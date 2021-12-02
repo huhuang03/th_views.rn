@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  SafeAreaView,
-  StatusBar,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {SafeAreaView, StatusBar, useColorScheme, View} from 'react-native';
 import ExampleDropFilter from './src/ExampleDropFilter';
 import ExamplePromptModal from './src/ExamplePromptModal';
 

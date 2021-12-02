@@ -1,2 +1,2 @@
-// export * from './DropFilterView';
-// export * from './model';
+export * from './DropFilterView';
+export * from './model';
