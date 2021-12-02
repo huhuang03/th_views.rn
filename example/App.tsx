@@ -1,13 +1,12 @@
 import React from 'react';
 import {
   SafeAreaView,
-  ScrollView,
   StatusBar,
   useColorScheme,
   View,
 } from 'react-native';
-
 import ExampleDropFilter from './src/ExampleDropFilter';
+import ExamplePromptModal from './src/ExamplePromptModal';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -27,6 +26,9 @@ const App = () => {
         }}>
         <ExampleDropFilter />
         {/*<ExampleLoadList />*/}
+        {/*<ExampleDropFilter />*/}
+        {/*<ExampleImage />*/}
+        {/*<ExamplePromptModal />*/}
       </View>
     </SafeAreaView>
   );

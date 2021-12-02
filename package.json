@@ -1,6 +1,6 @@
 {
   "name": "th_views.rn",
-  "version": "0.0.2-rc.10",
+  "version": "0.0.4-rc.1",
   "main": "src/index.ts",
   "license": "MIT",
   "source": "src/index.ts",
@@ -14,13 +14,13 @@
     "src"
   ],
   "dependencies": {
-    "@zfkcyjy/react-native-fast-image": "^8.5.11-rc.1",
-    "th_comm.rn": "^0.0.4-alpha.9"
+    "@zfkcyjy/react-native-fast-image": "^8.5.11-rc.1"
   },
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "react-native-vector-icons": "*"
+    "react-native-vector-icons": "*",
+    "th_comm.rn": "*"
   },
   "devDependencies": {
     "@babel/runtime": "^7.16.3",
