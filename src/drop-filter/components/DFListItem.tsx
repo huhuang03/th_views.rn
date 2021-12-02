@@ -12,13 +12,13 @@ export interface ListItemProps {
   data?: DFDataItem[];
 
   select?: DFSelectItem;
-  addAll: boolean;
+  addAll?: boolean;
 }
 
 // what's the right behavior when parent choice has change?
 // should I update?
 const DFListItem: React.FC<ListItemProps> = props => {
-  const {data = [], title, onClick} = props;
+  const {data = [], title, onClick, addAll = true} = props;
   const [select, setSelect] = useState(props.select);
   const level = data?.[0].level ?? -1;
 
@@ -28,7 +28,7 @@ const DFListItem: React.FC<ListItemProps> = props => {
 
   const items: DFDataItem[] = useMemo(() => {
     const rst: DFDataItem[] = [];
-    if (props.addAll) {
+    if (addAll) {
       rst.push({
         level: level,
         name: `全部${title}`,
@@ -51,11 +51,8 @@ const DFListItem: React.FC<ListItemProps> = props => {
         renderItem={item => {
           return <Pressable
             onPress={() => {
+              console.log('111')
               onClick(item.item)
-              // onClick({
-              //   code: item.item.code,
-              //   name: item.item.title
-              // }, item.item.isAll);
             }}
             style={{
               flex: 1,

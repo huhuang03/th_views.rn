@@ -6,10 +6,12 @@ export interface DFModel {
   code: Code;
 }
 
-// 暂时先做简单一点，因为我们还有想好怎么去规划code.
+// how to remember the item?
 export interface DFDataItem extends DFModel {
   level: number;
+  select?: DFDataItem;
   list?: DFDataItem[];
+
   // 懒加载，通过上一个选择去获取
   listLoader?: (_s: DFSelectItem) => Promise<DFDataItem>;
 }
@@ -26,9 +28,9 @@ export const DFDataItemMethod = {
 
 export interface DropFilterData {
   // this is not good?
-  main: DFDataItem[];
+  main?: DFDataItem[];
 
-  others: {
+  others?: {
     name: string;
     code: string;
     list: DFModel[];

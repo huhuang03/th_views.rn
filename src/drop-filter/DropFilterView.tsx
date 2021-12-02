@@ -1,22 +1,21 @@
 import React, {useState} from 'react';
 import {useWindowDimensions, View} from 'react-native';
 import {
-  CODE_ALL,
   DropFilterData,
-  DropFilterDataMethod,
   DFModel,
   DropFilterSelect,
-  DropFilterSelectMethod
 } from './model';
 import _TitleItem from './components/_TitleItem';
 import {isEmptyArray} from '../module/util/util.js';
 import {gDp} from 'th_comm.rn';
 import DFListItem from './components/DFListItem';
 import _OtherView from './components/other/_OtherView';
+import DFStaticContent from './components/DFStaticContent';
 
 export interface DropFilterViewProps {
   data: DropFilterData;
-  onConfirm: (select: DropFilterSelect) => void;
+  // any better idea?
+  onConfirm?: (select: DropFilterSelect) => void;
 }
 
 const INDEX_COLSPAN = -1;
@@ -56,13 +55,14 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
   }
 
   const isSelectOther = () => {
-    return index == data.main.length;
+    return index == data.main?.length;
   }
 
   // ok, let's do somethings
   const _TabTitle = () => {
     // ok, fix the title.
 
+    console.log(`data.main?: `, data.main);
     return (<View
       style={{
         flexDirection: 'row',
@@ -70,7 +70,7 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
         alignItems: 'center',
         justifyContent: 'space-around',
       }}>
-      {data.main.map((item, i) => {
+      {data.main?.map((item, i) => {
         // fuck, how to fix the title?
         let _title =  mainNames[i] || item.name;
         return (
@@ -79,9 +79,9 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
           }}/>);
       })}
       {!isEmptyArray(data.others) && <_TitleItem
-          key={data.others.length.toString()}
+          key={data.others?.length.toString()}
           title={'筛选'} isOther={true} isExpand={isSelectOther()} onClick={(isExpand) => {
-        setIndex(isExpand? INDEX_COLSPAN : data.main.length);
+        setIndex(isExpand? INDEX_COLSPAN : data.main?.length || INDEX_COLSPAN);
       }} />}
     </View>)
   }
@@ -90,86 +90,8 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
   // for now we ignore?
   const _ContentItem = () => {
     // how can you update the data?
-
-    const itemDataL0 = data.main[index];
-    let _selectL0 = DropFilterSelectMethod.main.getL0Select(index, select.main);
-    console.log('_select 0: ', _selectL0);
-
-    const itemDataL1 = DropFilterDataMethod.getItemByCode(_selectL0.code, itemDataL0);
-    let _selectL1 = _selectL0 && _selectL0.child;
-    console.log('itemDataL1: ', itemDataL1);
-
-    const itemDataL2 = DropFilterDataMethod.getItemByCode(_selectL1?.code, itemDataL1);
-    let _selectL2 = _selectL1 && _selectL1.child;
-
-    return <View
-      style={{
-        flex: 1,
-        flexDirection: 'row',
-      }}>
-
-      <DFListItem
-        key={"0"}
-        style={{
-          flex: 1,
-          height: '100%',
-        }}
-        title={itemDataL0.name}
-        onClick={(code, isAll) => {
-          _selectL0.code = code.code;
-          _selectL0.isAll = code.code === CODE_ALL;
-          _handleMainConfirm(index, code, code.code === CODE_ALL);
-        }}
-        backgroundColor={'white'}
-        data={{...itemDataL0}}
-        select={_selectL0} />
-
-      {itemDataL1 && <DFListItem
-        key={"1"}
-        style={{
-          flex: 1,
-          height: '100%',
-        }}
-        title={itemDataL1.name}
-        onClick={(code, isAll) => {
-          if (_selectL0.child?.code != code.code) {
-            _selectL0.child = {
-              level: _selectL0.level + 1,
-              code: code.code,
-              isAll: code.code === CODE_ALL,
-            }
-            _handleMainConfirm(index, code, code.code === CODE_ALL);
-          }
-        }}
-        backgroundColor={'white'}
-        data={{
-          ...itemDataL1
-        }}
-        select={_selectL1} /> || <View key={'empty_1'} style={{flex: 1}} />}
-
-      {itemDataL2 && <DFListItem
-          key={"2"}
-          style={{
-            flex: 1,
-            height: '100%',
-          }}
-          title={itemDataL2.name}
-          onClick={(model, isAll) => {
-            if (_selectL1?.child?.code != model.code) {
-              _selectL1!.child = {
-                level: _selectL1!.level + 1,
-                code: model.code,
-                isAll: model.code === CODE_ALL,
-              }
-              _handleMainConfirm(index, model, true);
-            }
-          }}
-          backgroundColor={'white'}
-          data={{
-            ...itemDataL2
-          }}
-          select={_selectL2} /> || <View key={'empty_2'} style={{flex: 1}} />}
-    </View>
+    const _data = data.main![index];
+    return <DFStaticContent data={_data} />
   }
 
   const _ContentOther = () => {

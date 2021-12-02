@@ -7,10 +7,7 @@ import {
   View,
 } from 'react-native';
 
-import {Colors} from 'react-native/Libraries/NewAppScreen';
 import ExampleDropFilter from './src/ExampleDropFilter';
-import ExampleImage from './src/ExampleImage';
-import ExampleLoadList from './src/example-load-list/ExampleLoadList';
 
 const App = () => {
   const isDarkMode = useColorScheme() === 'dark';
@@ -28,8 +25,8 @@ const App = () => {
           backgroundColor: 'white',
           flex: 1,
         }}>
-        {/*<ExampleDropFilter />*/}
-        <ExampleLoadList />
+        <ExampleDropFilter />
+        {/*<ExampleLoadList />*/}
       </View>
     </SafeAreaView>
   );

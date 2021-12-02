@@ -6194,6 +6194,11 @@ text-table@^0.2.0:
   resolved "https://registry.npmjs.org/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
+th_comm.rn@^0.0.4-alpha.9:
+  version "0.0.4-alpha.9"
+  resolved "https://registry.yarnpkg.com/th_comm.rn/-/th_comm.rn-0.0.4-alpha.9.tgz#45276107398bc30befbb707436bf9313b73900f4"
+  integrity sha512-TpXFpMiV3Y0xkMAdi8pO0z2+87psbArzi1yGH41GWK/uiruLJkXJFHBY5XxwdGzx/Toyr9ra3eOV+P0L+4E1cw==
+
 throat@^5.0.0:
   version "5.0.0"
   resolved "https://registry.npmjs.org/throat/-/throat-5.0.0.tgz#c5199235803aad18754a667d659b5e72ce16764b"
