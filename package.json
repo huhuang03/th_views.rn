@@ -1,6 +1,6 @@
 {
   "name": "th_views.rn",
-  "version": "0.0.2-rc.10",
+  "version": "0.0.3",
   "main": "src/index.ts",
   "license": "MIT",
   "source": "src/index.ts",
