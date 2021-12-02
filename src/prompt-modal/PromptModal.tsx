@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {View, Button, Modal, TextInput, TextInputProps} from 'react-native';
+import {View, Button, Modal, TextInput, TextInputProps, ViewStyle} from 'react-native';
 import SizedBox from '../SizedBox';
 import {gDp} from 'th_comm.rn';
 
@@ -7,6 +7,7 @@ export interface PromptModalProps {
   show: boolean;
   onDismiss: (value: string, isConfirm: boolean) => void;
   input?: TextInputProps;
+  style?: ViewStyle;
 }
 
 const PromptModal: React.FC<PromptModalProps> = props => {
@@ -36,11 +37,12 @@ const PromptModal: React.FC<PromptModalProps> = props => {
       visible={props.show}>
       <View
         style={{
-          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+          backgroundColor: 'rgba(0, 0, 0, 0.7)',
           flex: 1,
           paddingHorizontal: gDp(100),
           alignItems: 'center',
           justifyContent: 'center',
+          ...props.style,
         }}>
         <View
           style={{
