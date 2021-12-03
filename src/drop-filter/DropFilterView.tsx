@@ -11,7 +11,7 @@ import {gDp} from 'th_comm.rn';
 import DFListItem from './components/DFListItem';
 // import _OtherView from './components/other/_OtherView';
 import DFStaticContent from './components/DFStaticContent';
-import Icon from 'react-native-vector-icons/FontAwesome5'
+import FontAwesome5 from 'react-native-vector-icons/FontAwesome5';
 
 export interface DropFilterViewProps {
   data: DropFilterData;
@@ -67,7 +67,6 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
   // ok, let's do somethings
   const _TabTitle = () => {
     // ok, fix the title.
-
     console.log(`data.main?: `, data.main);
     return (<View
       style={{
@@ -83,8 +82,8 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
         return (
           <_TitleItem
             hint={{
-              colspan: <Icon name={'chevron-down'} />,
-              expand: <Icon name={'chevron-up'} />
+              colspan: <FontAwesome5 name={'chevron-up'} />,
+              expand: <FontAwesome5 name={'chevron-down'} />
             }}
             key={i.toString()}
             title={_title}
@@ -96,8 +95,8 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
       })}
       {!isEmptyArray(data.others) && <_TitleItem
           hint={{
-            colspan: <Icon name={'chevron-down'} />,
-            expand: <Icon name={'chevron-up'} />
+            colspan: <FontAwesome5 name={'chevron-down'} />,
+            expand: <FontAwesome5 name={'chevron-up'} />
           }}
           key={data.others?.length.toString()}
           title={'筛选'} isOther={true} isExpand={isSelectOther()} onClick={(isExpand) => {

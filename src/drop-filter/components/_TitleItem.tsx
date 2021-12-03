@@ -31,6 +31,7 @@ const _TitleItem: React.FC<_TitleItemProps> = props => {
             fontSize: gDp(24),
             color: props.isExpand? '#FC6600' : '#3C3C3C'
           }}>{props.title}</Text>
+        {props.isExpand? props.hint.expand : props.hint.colspan}
       </View>
     </Pressable>
   );
