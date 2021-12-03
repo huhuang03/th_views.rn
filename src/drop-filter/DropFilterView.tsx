@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Text, useWindowDimensions, View} from 'react-native';
 import {
   DropFilterData,
@@ -30,6 +30,10 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
     main: {},
     others: {},
   })
+
+  useEffect(() => {
+    setData(props.data)
+  }, [props.data]);
 
   const [mainNames, setMainNames] = useState<string[]>([]);
 
