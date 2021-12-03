@@ -48,9 +48,13 @@ export const DFDataItemMethod = {
 
 // export interface
 
+export interface DFDataMain extends DFDataItem  {
+  title: string;
+}
+
 export interface DropFilterData {
   // this is not good?
-  main?: DFDataItem[];
+  main?: DFDataMain[];
 
   others?: {
     name: string;

@@ -6,6 +6,9 @@ import DFListItem from './DFListItem';
 export interface DFStaticContentProps {
   // so what this data present?
   data: DFDataItem;
+
+  // outter want know what I clicked?
+  onClick?: (item: DFDataItem) => void;
 }
 
 // any better idea to present the select?
@@ -41,6 +44,7 @@ const DFStaticContent: React.FC<DFStaticContentProps> = props => {
             curData!.select = item;
             setData({...data})
           }
+          props.onClick?.(item);
         }} />)
       _data = _data.select;
     }

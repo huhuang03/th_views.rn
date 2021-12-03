@@ -14,13 +14,15 @@
     "src"
   ],
   "dependencies": {
-    "@zfkcyjy/react-native-fast-image": "^8.5.11-rc.1"
+    "@zfkcyjy/react-native-fast-image": "^8.5.11-rc.1",
+    "react-native-vector-icons": "^9.0.0",
+    "th_comm.rn": "^0.0.4-alpha.9"
   },
   "peerDependencies": {
     "react": "*",
     "react-native": "*",
-    "react-native-vector-icons": "*",
-    "th_comm.rn": "*"
+    "react-native-vector-icons": "^9.0.0",
+    "th_comm.rn": "^0.0.4-alpha.9"
   },
   "devDependencies": {
     "@babel/runtime": "^7.16.3",

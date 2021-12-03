@@ -3,7 +3,7 @@ import {Text, useWindowDimensions, View} from 'react-native';
 import {
   DropFilterData,
   DFModel,
-  DropFilterSelect,
+  DropFilterSelect, CODE_ALL,
 } from './model';
 import _TitleItem from './components/_TitleItem';
 import {isEmptyArray} from '../module/util/util.js';
@@ -11,6 +11,7 @@ import {gDp} from 'th_comm.rn';
 import DFListItem from './components/DFListItem';
 // import _OtherView from './components/other/_OtherView';
 import DFStaticContent from './components/DFStaticContent';
+import Icon from 'react-native-vector-icons/FontAwesome5'
 
 export interface DropFilterViewProps {
   data: DropFilterData;
@@ -21,9 +22,10 @@ export interface DropFilterViewProps {
 const INDEX_COLSPAN = -1;
 
 export const DropFilterView: React.FC<DropFilterViewProps> = props => {
-  const {data, onConfirm} = props;
+  const {onConfirm} = props;
   const [index, setIndex] = useState(INDEX_COLSPAN);
   const height = useWindowDimensions().height;
+  const [data, setData] = useState(props.data);
   const [select, setSelect] = useState<DropFilterSelect>({
     main: {},
     others: {},
@@ -73,12 +75,26 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
       {data.main?.map((item, i) => {
         // fuck, how to fix the title?
         let _title =  mainNames[i] || item.name;
+        _title = item.title || item.name;
         return (
-          <_TitleItem key={i.toString()} title={_title} isOther={false} isExpand={i === index} onClick={isExpand => {
-            setIndex(isExpand ? INDEX_COLSPAN : i);
-          }}/>);
+          <_TitleItem
+            hint={{
+              colspan: <Icon name={'chevron-down'} />,
+              expand: <Icon name={'chevron-up'} />
+            }}
+            key={i.toString()}
+            title={_title}
+            isOther={false}
+            isExpand={i === index}
+            onClick={isExpand => {
+              setIndex(isExpand ? INDEX_COLSPAN : i);
+            }}/>);
       })}
       {!isEmptyArray(data.others) && <_TitleItem
+          hint={{
+            colspan: <Icon name={'chevron-down'} />,
+            expand: <Icon name={'chevron-up'} />
+          }}
           key={data.others?.length.toString()}
           title={'筛选'} isOther={true} isExpand={isSelectOther()} onClick={(isExpand) => {
         setIndex(isExpand? INDEX_COLSPAN : data.main?.length || INDEX_COLSPAN);
@@ -91,7 +107,18 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
   const _ContentItem = () => {
     // how can you update the data?
     const _data = data.main![index];
-    return <DFStaticContent data={_data} />
+    return <DFStaticContent
+      onClick={item => {
+        _data.title = item.name;
+
+        if (isEmptyArray(item.list)) {
+          setData({
+            ...data
+          });
+          setIndex(INDEX_COLSPAN);
+        }
+      }}
+      data={_data} />
   }
 
   const _ContentOther = () => {

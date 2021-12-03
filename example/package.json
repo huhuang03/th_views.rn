@@ -15,6 +15,7 @@
     "@zfkcyjy/react-native-fast-image": "^8.5.11-rc.1",
     "react": "17.0.2",
     "react-native": "0.66.3",
+    "react-native-vector-icons": "^9.0.0",
     "th_comm.rn": "^0.0.4-alpha.9"
   },
   "devDependencies": {

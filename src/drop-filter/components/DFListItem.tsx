@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from 'react';
+import React, {useMemo} from 'react';
 import {Text, ColorValue, FlatList, ViewStyle, View, Pressable} from 'react-native';
 import {gDp} from 'th_comm.rn';
 import {CODE_ALL, DFDataItem, DFDataItemMethod, DFSelectItem} from '../model';
@@ -11,18 +11,18 @@ export interface ListItemProps {
   backgroundColor?: ColorValue;
   data?: DFDataItem;
 
-  // select?: DFSelectItem;
   addAll?: boolean;
 }
 
 // what's the right behavior when parent choice has change?
 // should I update?
 const DFListItem: React.FC<ListItemProps> = props => {
-  const {data, title, onClick, addAll = true} = props;
+  const {data, onClick, addAll = true} = props;
   console.log('DfListItem rerender by ', data);
   // const [select, setSelect] = useState(props.select);
   const list = data?.list?? []
   const level = (data?.level?? 0) + 1
+  const title = data?.name;
 
 
   const items: DFDataItem[] = useMemo(() => {
