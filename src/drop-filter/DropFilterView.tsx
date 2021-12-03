@@ -100,6 +100,8 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
     // return <_OtherView others={data.others} onConfirm={() => {}} />
   }
 
+  const contentHeight = height * 0.5;
+
   return (
     <View>
       <_TabTitle />
@@ -118,12 +120,12 @@ export const DropFilterView: React.FC<DropFilterViewProps> = props => {
           <View
             style={{
               width: '100%',
-              maxHeight: height * 0.7,
+              height: height * 0.9,
             }}>
             {isSelectOther()? <_ContentOther/> : <View
               style={{
                 backgroundColor: 'white',
-                minHeight: gDp(600),
+                height: contentHeight,
               }}
             ><_ContentItem/></View>}
           </View>

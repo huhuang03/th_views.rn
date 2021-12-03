@@ -1,7 +1,7 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {Text, ColorValue, FlatList, ViewStyle, View, Pressable} from 'react-native';
 import {gDp} from 'th_comm.rn';
-import {CODE_ALL, DFDataItem, DFSelectItem, DFDataItemMethod} from '../model';
+import {CODE_ALL, DFDataItem, DFDataItemMethod, DFSelectItem} from '../model';
 
 export interface ListItemProps {
   title: string;
@@ -11,7 +11,7 @@ export interface ListItemProps {
   backgroundColor?: ColorValue;
   data?: DFDataItem;
 
-  select?: DFSelectItem;
+  // select?: DFSelectItem;
   addAll?: boolean;
 }
 
@@ -19,13 +19,11 @@ export interface ListItemProps {
 // should I update?
 const DFListItem: React.FC<ListItemProps> = props => {
   const {data, title, onClick, addAll = true} = props;
-  const [select, setSelect] = useState(props.select);
+  console.log('DfListItem rerender by ', data);
+  // const [select, setSelect] = useState(props.select);
   const list = data?.list?? []
   const level = (data?.level?? 0) + 1
 
-  useEffect(() => {
-    setSelect(props.select)
-  }, [props.data, props.select?.code])
 
   const items: DFDataItem[] = useMemo(() => {
     const rst: DFDataItem[] = [];
@@ -38,7 +36,11 @@ const DFListItem: React.FC<ListItemProps> = props => {
     }
     rst.push(...list);
     return rst;
-  }, [data, select?.code])
+  }, [data])
+
+  const handleClick = (item: DFDataItem) => {
+    onClick(item);
+  }
 
   return (
     <View
@@ -47,14 +49,17 @@ const DFListItem: React.FC<ListItemProps> = props => {
         ...props.style,
       }}
       >
+      {/*key didn't change so the value is not change?*/}
       <FlatList<DFDataItem>
-        keyExtractor={((item, index) => `${item.level}-${item.code}-${index}`)}
+        keyExtractor={((item, index) => `${DFDataItemMethod.key(item)}_${item.code === data?.code}`)}
+        showsVerticalScrollIndicator={false}
         data={items}
         renderItem={item => {
+          console.log('item rerender: ', item.item);
+          const isSelect = item.item.code === data?.select?.code;
           return <Pressable
             onPress={() => {
-              console.log('111')
-              onClick(item.item)
+              handleClick(item.item)
             }}
             style={{
               flex: 1,
@@ -63,14 +68,14 @@ const DFListItem: React.FC<ListItemProps> = props => {
             <View
               style={{
                 height: gDp(64),
-                backgroundColor: DFDataItemMethod.isSelect(item.item, select)? '#f5f5f5': 'white',
+                backgroundColor: isSelect? '#f5f5f5': 'white',
                 flex: 1,
                 flexDirection: 'row',
                 alignItems: 'center',
               }}>
               <View
                 style={{
-                  backgroundColor: DFDataItemMethod.isSelect(item.item, select)? '#fc6600' : 'transparent',
+                  backgroundColor: isSelect? '#fc6600' : 'transparent',
                   width: gDp(4),
                   height: gDp(20),
                 }}>
@@ -79,7 +84,7 @@ const DFListItem: React.FC<ListItemProps> = props => {
                 key={item.index.toString()}
                 style={{
                   fontSize: gDp(24),
-                  color: DFDataItemMethod.isSelect(item.item, select)? '#fc6600' : '#3c3c3c',
+                  color: isSelect? '#fc6600' : '#3c3c3c',
                   paddingLeft: gDp(24),
                 }}>{item.item.name}</Text>
             </View>

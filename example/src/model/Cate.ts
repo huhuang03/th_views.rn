@@ -3,7 +3,7 @@ import {DFDataItem} from 'th_views.rn';
 export interface Cate {
   cateName: string;
   id: number;
-  cateLists?: Cate[];
+  cateList?: Cate[];
 }
 
 export const CateMethod = {
@@ -14,7 +14,7 @@ export const CateMethod = {
         level,
         name: cate.cateName,
         code: cate.id,
-        list: cate.cateLists && this.toDropList(cate.cateLists, level + 1),
+        list: cate.cateList && this.toDropList(cate.cateList, level + 1),
       });
     }
     return rst;

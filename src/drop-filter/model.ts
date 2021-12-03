@@ -17,18 +17,36 @@ export interface DFDataItem extends DFModel {
 }
 
 export const DFDataItemMethod = {
+  key(thiz: DFDataItem): string {
+    return `${thiz.level}_${thiz.code}`
+  },
+
   isSelect(thiz: DFDataItem, select?: DFSelectItem): boolean {
     return thiz.code == select?.code;
   },
 
-  isSelect(thiz: DFDataItem, item?: DFDataItem): boolean {
-    return thiz.code == select?.code;
+  itemIsSelect(thiz: DFDataItem, item?: DFDataItem): boolean {
+    return thiz.code == item?.code;
+  },
+
+  clearSelect(thiz: DFDataItem) {
+    let p: DFDataItem | undefined = thiz;
+    while (p) {
+      let select: DFDataItem | undefined = p.select;
+      p.select = undefined;
+      p = select;
+      // let tmp: DFDataItem = p;
+      // p.select = undefined;
+      // p = tmp.select;
+    }
   }
   // td
   // hasNext(thiz?: DFDataItem): boolean {
   //   return !!thiz && (thiz.list && thiz.list.length > 0) || !!thiz?.listLoader;
   // }
 }
+
+// export interface
 
 export interface DropFilterData {
   // this is not good?

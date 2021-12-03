@@ -6,6 +6,7 @@ export function getCates(): Promise<DFDataItem[]> {
   return fetch(url.CATES)
     .then(res => res.json())
     .then(data => {
+      console.log('data: ', data);
       return CateMethod.toDropList(data.data.list, 0);
     });
 }
